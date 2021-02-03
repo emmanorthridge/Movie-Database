@@ -11,6 +11,18 @@ import {
   Modal,
 } from 'react-native';
 
+import { logger } from "react-native-logs";
+
+
+
+const log = logger.createLogger();
+
+log.debug("This is a Debug log");
+log.info("This is an Info log");
+log.warn("This is a Warning log");
+log.error("This is an Error log");
+
+
 function SearchScreen(props) {
   const apiurl = 'http://www.omdbapi.com/?apikey=c54d4f89';
   const [state, setState] = useState({
@@ -22,6 +34,7 @@ function SearchScreen(props) {
   const search = () => {
     axios(apiurl + '&s=' + state.s).then(({ data }) => {
       let results = data.Search;
+      console.log(results);
       setState((prevState) => {
         return { ...prevState, results: results };
       });
@@ -31,6 +44,7 @@ function SearchScreen(props) {
   const openPopup = (id) => {
     axios(apiurl + '&i=' + id).then(({ data }) => {
       let result = data;
+      console.log(data);
       setState((prevState) => {
         return { ...prevState, selected: result };
       });
