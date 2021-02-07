@@ -11,17 +11,19 @@ import {
   Modal,
 } from 'react-native';
 
-import { logger } from "react-native-logs";
+import { logger, fileAsyncTransport } from 'react-native-logs';
+import * as FileSystem from 'expo-file-system';
 
+const config = {
+  severity: 'debug',
+  transport: fileAsyncTransport,
+  transportOptions: {
+    FS: FileSystem,
+    fileLogName: `.logs`,
+  },
+};
 
-
-const log = logger.createLogger();
-
-log.debug("This is a Debug log");
-log.info("This is an Info log");
-log.warn("This is a Warning log");
-log.error("This is an Error log");
-
+const log = logger.createLogger(config);
 
 function SearchScreen(props) {
   const apiurl = 'http://www.omdbapi.com/?apikey=c54d4f89';
@@ -34,7 +36,8 @@ function SearchScreen(props) {
   const search = () => {
     axios(apiurl + '&s=' + state.s).then(({ data }) => {
       let results = data.Search;
-      console.log(results);
+      console.log(results); // I would normally remove console.log, but for the purpose of this exercise I have left it in
+      // log.info(results) // If fileAsyncTransport worked
       setState((prevState) => {
         return { ...prevState, results: results };
       });
@@ -44,7 +47,8 @@ function SearchScreen(props) {
   const openPopup = (id) => {
     axios(apiurl + '&i=' + id).then(({ data }) => {
       let result = data;
-      console.log(data);
+      console.log(data); // I would normally remove console.log, but for the purpose of this exercise I have left it in
+      // log.info(results) // If fileAsyncTransport worked
       setState((prevState) => {
         return { ...prevState, selected: result };
       });
