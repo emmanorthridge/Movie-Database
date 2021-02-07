@@ -14,3 +14,9 @@ Run "expo start" or "npm start" to begin the application!
 ## API
 
 This app uses an external Api http://www.omdbapi.com/
+
+## Future Improvements
+
+Implement logging to a local file - currently using React Native Logs and Expo File System. 
+Fix error:
+"Unhandled Rejection (Error): react-native-logs: fileAsyncTransport - FileSystem not supported"
