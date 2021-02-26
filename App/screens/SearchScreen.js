@@ -36,8 +36,7 @@ function SearchScreen(props) {
   const search = () => {
     axios(apiurl + '&s=' + state.s).then(({ data }) => {
       let results = data.Search;
-      console.log(results); // I would normally remove console.log, but for the purpose of this exercise I have left it in
-      // log.info(results) // If fileAsyncTransport worked
+      console.log(results); 
       setState((prevState) => {
         return { ...prevState, results: results };
       });
@@ -47,8 +46,7 @@ function SearchScreen(props) {
   const openPopup = (id) => {
     axios(apiurl + '&i=' + id).then(({ data }) => {
       let result = data;
-      console.log(data); // I would normally remove console.log, but for the purpose of this exercise I have left it in
-      // log.info(results) // If fileAsyncTransport worked
+      console.log(data);
       setState((prevState) => {
         return { ...prevState, selected: result };
       });
